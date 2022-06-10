@@ -1,0 +1,51 @@
+body {
+	min-height: 100vh;
+	display: grid;
+	place-items: center;
+	background-color: hsl(200, 50%, 5%);
+}
+
+h1 {
+	color: hsl(200, 100%, 65%);
+}
+
+.ripple-button {
+	position: relative;
+	appearance: none;
+	isolation: isolate;
+	font-size: 3rem;
+	padding: 1em 3em;
+	cursor: pointer;
+	text-transform: uppercase;
+	background-color: transparent;
+	color: hsl(200, 100%, 65%);
+	border: 5px solid currentColor;
+	border-radius: 0.125em;
+	overflow: hidden;
+}
+
+.ripple-button::before {
+	content: '';
+	width: 150%;
+	aspect-ratio: 1 / 1;
+	position: absolute;
+	left: var(--x);
+	top: var(--y);
+	transform: translate(-50%, -50%) scale(0);
+	transition: transform 500ms;
+	z-index: -1;
+	opacity: 0.5;
+	border-radius: 50%;
+	background: #fff;
+}
+
+@keyframes pulse {
+	100% {
+		transform: translate(-50%, -50%) scale(1);
+		opacity: 0;
+	}
+}
+
+.pulse::before {
+	animation: pulse 500ms;
+}
